@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.it.plus.wcw.mapper.CustomerInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.it.plus.wcw.entity.CustomerInfo">
+        <id column="id" property="id" />
+        <result column="credit_code" property="creditCode" />
+        <result column="name" property="name" />
+        <result column="business_license" property="businessLicense" />
+        <result column="short_name" property="shortName" />
+        <result column="address" property="address" />
+        <result column="province" property="province" />
+        <result column="city" property="city" />
+        <result column="region" property="region" />
+        <result column="legal_person" property="legalPerson" />
+        <result column="legal_id_card" property="legalIdCard" />
+        <result column="auditor" property="auditor" />
+        <result column="auditor_time" property="auditorTime" />
+        <result column="note" property="note" />
+        <result column="industry" property="industry" />
+        <result column="status" property="status" />
+        <result column="longitude" property="longitude" />
+        <result column="latitude" property="latitude" />
+        <result column="audit_status" property="auditStatus" />
+        <result column="p_threshold" property="pThreshold" />
+        <result column="created_at" property="createdAt" />
+        <result column="created_by" property="createdBy" />
+        <result column="updated_at" property="updatedAt" />
+        <result column="updated_by" property="updatedBy" />
+        <result column="has_photo" property="hasPhoto" />
+        <result column="customer_type" property="customerType" />
+        <result column="is_listed" property="isListed" />
+        <result column="size" property="size" />
+        <result column="profile" property="profile" />
+        <result column="logo" property="logo" />
+        <result column="need_manager_fee" property="needManagerFee" />
+        <result column="manager_fee" property="managerFee" />
+        <result column="bill_server_rate" property="billServerRate" />
+        <result column="empty_talent_switch" property="emptyTalentSwitch" />
+        <result column="fee_status" property="feeStatus" />
+        <result column="daily_pay_type" property="dailyPayType" />
+        <result column="manager_limit" property="managerLimit" />
+        <result column="recommend_mode" property="recommendMode" />
+        <result column="fail_reason" property="failReason" />
+        <result column="ws_bank_no" property="wsBankNo" />
+        <result column="pay_fee" property="payFee" />
+    </resultMap>
+
+</mapper>

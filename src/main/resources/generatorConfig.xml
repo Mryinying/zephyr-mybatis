@@ -1,0 +1,64 @@
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--引入配置文件-->
+    <!--<properties resource="config.properties"/>-->
+
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+
+        <!-- 生成的pojo，将implements Serializable-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <!-- 使用lombok插件 -->
+<!--        <plugin type="mybatisGenPlugin.LombokPlugin"/>-->
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://192.168.85.22:3306/test001?useSSL=false&amp;tinyInt1isBit=false&amp;serverTimezone=UTC"
+                        userId="slave"
+                        password="slave"/>
+
+        <!--使用自定义的类型转换器-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+            <property name="useJSR310Types" value="true"/>
+        </javaTypeResolver>
+
+        <!-- !!!! Model Configurations !!!! -->
+        <javaModelGenerator targetPackage="com.it.entity" targetProject="src/main/java/">
+            <!--生成的java实体类需要继承哪个-->
+            <!--<property name="rootClass" value="com.wancai.common.data.base.BaseEntity"/>-->
+        </javaModelGenerator>
+
+        <!-- !!!! Mapper XML Configurations !!!! -->
+        <sqlMapGenerator targetPackage="mapper"
+                         targetProject="src/main/resources/"/>
+
+        <!-- !!!! Mapper Interface Configurations !!!! -->
+        <javaClientGenerator targetPackage="com.it.mapper"
+                             targetProject="src/main/java/"
+                             type="XMLMAPPER"/>
+
+        <table tableName="wcw_customer_info" domainObjectName="Customer">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="wcw_emp_customer" domainObjectName="EmpCustomer">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="wcw_emp_manager" domainObjectName="EmpManager">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="wcw_manager" domainObjectName="Manager">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="wcw_talent" domainObjectName="Talent">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+
+    </context>
+</generatorConfiguration>

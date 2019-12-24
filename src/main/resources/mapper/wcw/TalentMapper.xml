@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.it.plus.wcw.mapper.TalentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.it.plus.wcw.entity.Talent">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="mobile" property="mobile" />
+        <result column="id_card" property="idCard" />
+        <result column="id_card_positive" property="idCardPositive" />
+        <result column="id_card_negative" property="idCardNegative" />
+        <result column="id_card_hand" property="idCardHand" />
+        <result column="real_name" property="realName" />
+        <result column="real_name_alias" property="realNameAlias" />
+        <result column="talent_type" property="talentType" />
+        <result column="status" property="status" />
+        <result column="signature_status" property="signatureStatus" />
+        <result column="signature" property="signature" />
+        <result column="type" property="type" />
+        <result column="is_only_child" property="isOnlyChild" />
+        <result column="e_mail" property="eMail" />
+        <result column="qq" property="qq" />
+        <result column="we_chat" property="weChat" />
+        <result column="sex" property="sex" />
+        <result column="nation" property="nation" />
+        <result column="birthday" property="birthday" />
+        <result column="origin" property="origin" />
+        <result column="education" property="education" />
+        <result column="marriage" property="marriage" />
+        <result column="healthy" property="healthy" />
+        <result column="latitude" property="latitude" />
+        <result column="longitude" property="longitude" />
+        <result column="region" property="region" />
+        <result column="city" property="city" />
+        <result column="province" property="province" />
+        <result column="address" property="address" />
+        <result column="origin_address" property="originAddress" />
+        <result column="height" property="height" />
+        <result column="weight" property="weight" />
+        <result column="is_blacklist" property="isBlacklist" />
+        <result column="is_deleted" property="isDeleted" />
+        <result column="remark" property="remark" />
+        <result column="black_reason" property="blackReason" />
+        <result column="best_frame" property="bestFrame" />
+        <result column="created_at" property="createdAt" />
+        <result column="created_by" property="createdBy" />
+        <result column="updated_at" property="updatedAt" />
+        <result column="updated_by" property="updatedBy" />
+        <result column="is_recognised" property="isRecognised" />
+    </resultMap>
+
+</mapper>

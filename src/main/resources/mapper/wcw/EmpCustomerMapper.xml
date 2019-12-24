@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.it.plus.wcw.mapper.EmpCustomerMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.it.plus.wcw.entity.EmpCustomer">
+        <id column="id" property="id" />
+        <result column="talent_id" property="talentId" />
+        <result column="customer_id" property="customerId" />
+        <result column="settlement_type" property="settlementType" />
+        <result column="pay_type" property="payType" />
+        <result column="status" property="status" />
+        <result column="start_time" property="startTime" />
+        <result column="stop_time" property="stopTime" />
+        <result column="created_at" property="createdAt" />
+        <result column="created_by" property="createdBy" />
+        <result column="updated_at" property="updatedAt" />
+        <result column="updated_by" property="updatedBy" />
+    </resultMap>
+
+</mapper>
