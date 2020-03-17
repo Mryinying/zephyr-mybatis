@@ -119,7 +119,7 @@ public class Generator {
 
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
 //        strategy.setInclude(scanner("表名,多个英文逗号分割").split(","));
-        strategy.setInclude("wcw_customer_info", "wcw_manager", "wcw_emp_customer", "wcw_emp_manager", "wcw_talent");// 需要生成的表
+        strategy.setInclude("wcw_pagroup");// 需要生成的表
         //实体是否为lombok模型（默认 false）
         strategy.setEntityLombokModel(true);
         //生成 @RestController 控制器

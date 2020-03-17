@@ -17,7 +17,7 @@ mysql:
       driver-class-name: com.mysql.jdbc.Driver
 
 rocketmq:
-  name-server: 192.168.85.22:9876
+  name-server: 193.112.185.161:9876
   producer:
     group: my-group
     send-message-timeout: 3000

@@ -38,6 +38,7 @@ public class LogAspect {
 
         // 接口入参
         Object[] args = joinpoint.getArgs();
+        log.info("LogAspect: enter method={},args={}",name + "." + method, args);
 
         // 调用实际接口耗时
         long start = System.currentTimeMillis();
@@ -52,7 +53,7 @@ public class LogAspect {
         String json = gson.toJson(result);
 
         // 记录日志
-        log.info("LogAspect: enter method={},args={}, cost={}ms, result={}", name + "." + method, args, cost, json);
+        log.info("LogAspect: quit method={}, cost={}ms, result={}", name + "." + method, cost, json);
 
         // 返回调用接口结果
         return result;

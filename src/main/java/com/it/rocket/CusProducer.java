@@ -1,6 +1,7 @@
 package com.it.rocket;
 
 import com.it.plus.wcw.entity.CustomerInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
@@ -13,8 +14,9 @@ import java.util.List;
  * @Author wang_zy
  * @Date 2019/12/19 10:27
  */
-@Component
 @Order(2)
+@Slf4j
+@Component
 public class CusProducer {
 
     @Autowired
@@ -24,7 +26,8 @@ public class CusProducer {
         String name = "test";
         rocketmqtemplate.convertAndSend("test-topic-1", name);
         rocketmqtemplate.send("cus-topic-2", MessageBuilder.withPayload(list).build());
-        System.out.println("发送成功...");
+        log.info("发送成功...");
     }
 
 }
+
