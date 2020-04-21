@@ -4,7 +4,7 @@ import com.it.plus.wcw.entity.Talent;
 import com.it.plus.wcw.mapper.TalentMapper;
 import com.it.plus.wcw.service.ITalentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
+import org.apache.dubbo.config.annotation.Service;
 
 /**
  * <p>

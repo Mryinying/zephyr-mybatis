@@ -28,7 +28,6 @@ public class DBAspect {
         String method = joinPoint.getSignature().getName();
 
         // 接口入参
-        // Object[] args = joinpoint.getArgs();
         String[] pre = {"get", "select", "list", "query", "page"};
         for (String s : pre) {
             if (method.contains(s)) {
@@ -36,6 +35,8 @@ public class DBAspect {
                 break;
             }
         }
+
+        DbContextHolder.setDbType(DbContextHolder.SLAVE);
         return joinPoint.proceed();
     }
 

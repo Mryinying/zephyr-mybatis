@@ -23,3 +23,29 @@ rocketmq:
     send-message-timeout: 3000
     max-message-size: 4194304
     retry-times-when-send-failed: 2
+
+spring:
+  application:
+    name: zephyr-consumer
+  data:
+    mongodb:
+      host: 192.168.85.23
+      port: 27017
+      database: test
+      username: root
+      password: root
+
+dubbo:
+  registry:
+    address: zookeeper://192.168.85.22:2181
+  protocol:
+    name: dubbo
+    port: -1
+  provider:
+    filter: -exception
+  config-center:
+    timeout: 10000
+
+#引入日志配置文件
+logging:
+  config: classpath:log4j2.xml

@@ -1,9 +1,11 @@
 package com.it;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+
+import javax.annotation.PostConstruct;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 /**
  * @Author wang_zy
@@ -13,6 +15,28 @@ import org.springframework.context.annotation.ComponentScan;
 public class App {
 
     public static void main(String[] args) {
+        System.setProperty("LOCAL_IP",  getLocalIp() );
         SpringApplication.run(App.class, args);
+    }
+
+    /**
+     * 获得本机的内网地址（String）
+     */
+    private static String getLocalIp(){
+        try {
+            return InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException e) {
+            return "unknown-ip";
+        }
+    }
+
+    /**
+     * 设置 "local-ip" system 变量，给log4j2 配置使用：
+     */
+    @PostConstruct
+    public void postConstruct(){
+        String localIp = getLocalIp();
+        System.out.println("LOCAL_IP for Log4j2: " + localIp);
+        System.setProperty("LOCAL_IP", localIp );
     }
 }
