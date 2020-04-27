@@ -5,64 +5,65 @@ import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
+import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
+import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
+import com.baomidou.mybatisplus.generator.config.rules.IColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.baomidou.mybatisplus.generator.engine.VelocityTemplateEngine;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @Author wang_zy
- * @Date 2019/12/16 16:06
- */
 public class Generator {
+
+
+    private static String[] tables = {
+            "wcw_customer_info"
+    };
 
     public static void main(String[] args) {
 
-
         AutoGenerator mpg = new AutoGenerator();
         // 选择 freemarker 引擎，默认 Velocity
-        mpg.setTemplateEngine(new FreemarkerTemplateEngine());
+        mpg.setTemplateEngine(new VelocityTemplateEngine());
+
+        // 数据源配置
+        DataSourceConfig dsc = new DataSourceConfig();
+        dsc.setDbType(DbType.MYSQL);
+        dsc.setDriverName("com.mysql.jdbc.Driver");
+        dsc.setUsername("master");
+        dsc.setPassword("master");
+        dsc.setUrl("jdbc:mysql://192.168.85.22:3306/test?useUnicode=true&serverTimezone=UTC&characterEncoding=utf8");
+        dsc.setTypeConvert(new MySqlTypeConvertCustom());
+        mpg.setDataSource(dsc);
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        gc.setAuthor("zzzz");
+        gc.setAuthor(System.getProperties().getProperty("user.name"));
         String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir(projectPath + "/src/main/java");
+        gc.setOutputDir(projectPath + "/target");
         gc.setFileOverride(false);// 是否覆盖同名文件，默认是false
         gc.setActiveRecord(true);// 不需要ActiveRecord特性的请改为false
         gc.setEnableCache(false);// XML 二级缓存
         gc.setBaseResultMap(true);// XML ResultMap
-        gc.setBaseColumnList(false);// XML columList
-        gc.setServiceImplName("%s");
-
+        gc.setBaseColumnList(true);// XML columList
+        //设置类名规范
+        /*gc.setServiceImplName("%sServiceImpl");
+        gc.setControllerName(null);*/
         mpg.setGlobalConfig(gc);
-
-        // 数据源配置
-        DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setDbType(DbType.MARIADB);
-        dsc.setDriverName("com.mysql.jdbc.Driver");
-        dsc.setUsername("slave");
-        dsc.setPassword("slave");
-        dsc.setUrl("jdbc:mysql://192.168.85.22:3306/test001?useUnicode=true&serverTimezone=UTC&characterEncoding=utf8");
-        mpg.setDataSource(dsc);
-
-//        // 策略配置
-//        StrategyConfig strategy = new StrategyConfig();
-//        //strategy.setTablePrefix(new String[] { "buy_" });// 此处可以修改为您的表前缀
-//        strategy.setNaming(NamingStrategy.no_change);// 表名生成策略
-//        strategy.setInclude("wcw_customer_info", "wcw_manager", "wcw_emp_customer", "wcw_emp_manager", "wcw_talent");// 需要生成的表
-//        mpg.setStrategy(strategy);
 
         // 包配置
         PackageConfig pc = new PackageConfig();
+
         pc.setParent("com.it.plus");
         pc.setModuleName("wcw");
         pc.setEntity("entity");
+        pc.setService("service");
+        pc.setServiceImpl("service.impl");
         pc.setController("controller");
         pc.setMapper("mapper");
+
         mpg.setPackageInfo(pc);
 
         /**
@@ -90,7 +91,7 @@ public class Generator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/src/main/resources/mapper/" + pc.getModuleName() + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+                return projectPath+"/src/main/resources/mapper/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
             }
         });
         cfg.setFileOutConfigList(focList);
@@ -103,11 +104,13 @@ public class Generator {
 
         // 配置自定义输出模板
         //指定自定义模板路径，注意不要带上.ftl/.vm, 会根据使用的模板引擎自动识别
-//        templateConfig.setEntity("templates/entity2.java");
-//        templateConfig.setService(new TemplateConfig().getService());
-//        templateConfig.setController(new TemplateConfig().getController());
+        /*templateConfig.setEntity("templates/entity2.java");
+        templateConfig.setService(new TemplateConfig().getService());
+        templateConfig.setController(new TemplateConfig().getController());*/
 
         templateConfig.setXml(null);
+        templateConfig.setServiceImpl("/templates/serviceImpl.java");
+        templateConfig.setController("/templates/controller.java");
         mpg.setTemplate(templateConfig);
 
         /**
@@ -118,8 +121,9 @@ public class Generator {
         strategy.setNaming(NamingStrategy.underline_to_camel);
 
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-//        strategy.setInclude(scanner("表名,多个英文逗号分割").split(","));
-        strategy.setInclude("wcw_pagroup");// 需要生成的表
+        //strategy.setInclude(scanner("表名,多个英文逗号分割").split(","));
+        // 需要生成的表
+        strategy.setInclude(tables);
         //实体是否为lombok模型（默认 false）
         strategy.setEntityLombokModel(true);
         //生成 @RestController 控制器
@@ -129,11 +133,11 @@ public class Generator {
         //设置自定义继承的Controller类全称，带包名
         //strategy.setSuperControllerClass("com.jiangfeixiang.mpdemo.BaseController");
         //设置自定义基础的Entity类，公共字段
-//        strategy.setSuperEntityColumns("id");
+        //strategy.setSuperEntityColumns("id");
         //驼峰转连字符
         strategy.setControllerMappingHyphenStyle(true);
         //表名前缀
-        strategy.setTablePrefix(pc.getModuleName() + "_");
+        strategy.setTablePrefix("wcw_");
         mpg.setStrategy(strategy);
         mpg.setTemplateEngine(new VelocityTemplateEngine());
 
@@ -141,4 +145,22 @@ public class Generator {
         mpg.execute();
     }
 
+}
+
+/**
+ * 自定义类型转换
+ */
+class MySqlTypeConvertCustom extends MySqlTypeConvert implements ITypeConvert {
+    @Override
+    public IColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
+        String t = fieldType.toLowerCase();
+        if (t.contains("tinyint(1)")) {
+            return DbColumnType.INTEGER;
+        }else if (t.contains("float")) {
+            return DbColumnType.DOUBLE;
+        }else if (t.contains("blob")) {
+            return DbColumnType.BYTE_ARRAY;
+        }
+        return super.processTypeConvert(globalConfig, fieldType);
+    }
 }

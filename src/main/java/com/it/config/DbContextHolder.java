@@ -19,7 +19,7 @@ public class DbContextHolder {
             log.error("========dbType null=========");
             throw new NullPointerException();
         }
-        log.info("=======set dbType：{}========",dbType);
+        log.debug("=======set dbType：{}========",dbType);
         contextHolder.set(dbType);
     }
 

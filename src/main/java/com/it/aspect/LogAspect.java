@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializer;
+import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -38,7 +39,8 @@ public class LogAspect {
 
         // 接口入参
         Object[] args = joinpoint.getArgs();
-        log.info("LogAspect: enter method={},args={}",name + "." + method, args);
+        log.debug("LogAspect: enter method={},args={}",name + "." + method, args);
+//        log.info("LogAspect: enter method={"+name + "." + method+"},args={"+ args +"}");
 
         // 调用实际接口耗时
         long start = System.currentTimeMillis();
@@ -53,7 +55,8 @@ public class LogAspect {
         String json = gson.toJson(result);
 
         // 记录日志
-        log.info("LogAspect: quit method={}, cost={}ms, result={}", name + "." + method, cost, json);
+        log.debug("LogAspect: quit method={}, cost={}ms, result={}", name + "." + method, cost, json);
+//        log.info("LogAspect: quit method={"+name + "." + method+"}, cost={"+cost+"}ms, result={"+json+"}");
 
         // 返回调用接口结果
         return result;

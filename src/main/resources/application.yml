@@ -6,14 +6,14 @@ mysql:
     mapper-locations: classpath:/mapper/wcw/*.xml
     config-location: classpath:/mybatis-config.xml
     master:
-      url: jdbc:mysql://192.168.85.22:3306/test001?useUnicode=true&characterEncoding=utf-8&useSSL=true
-      username: slave
-      password: slave
-      driver-class-name: com.mysql.jdbc.Driver
-    slave:
-      url: jdbc:mysql://192.168.85.23:3306/test001?useUnicode=true&characterEncoding=utf-8&useSSL=true
+      url: jdbc:mysql://192.168.85.22:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false
       username: master
       password: master
+      driver-class-name: com.mysql.jdbc.Driver
+    slave:
+      url: jdbc:mysql://192.168.85.24:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      username: slave
+      password: slave
       driver-class-name: com.mysql.jdbc.Driver
 
 rocketmq:
@@ -29,11 +29,11 @@ spring:
     name: zephyr-consumer
   data:
     mongodb:
-      host: 192.168.85.23
+      host: 192.168.85.22
       port: 27017
       database: test
-      username: root
-      password: root
+      username: test
+      password: test
 
 dubbo:
   registry:
@@ -48,4 +48,4 @@ dubbo:
 
 #引入日志配置文件
 logging:
-  config: classpath:log4j2.xml
+  config: classpath:logback-spring.xml

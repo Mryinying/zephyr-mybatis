@@ -11,7 +11,7 @@
         <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [${sys:LOCAL_IP}] %-5p %logger{24}[%l] - %msg%n"/>
         <!-- 定义日志存储的路径，不要配置相对路径 -->
         <property name="FILE_PATH" value="/logs"/>
-        <property name="FILE_NAME" value="myfileName"/>
+        <property name="FILE_NAME" value="zephyr"/>
         <property name="localIpFormat" value="${sys:LOCAL_IP}"/>
     </Properties>
 
@@ -78,9 +78,9 @@
         <NoSql name="mongoAppender" bufferSize="10">
             <MongoDb databaseName="test"
                      collectionName="${FILE_NAME}"
-                     server="192.168.85.23"
-                     username="root"
-                     password="root"
+                     server="192.168.85.22"
+                     username="test"
+                     password="test"
                      port="27017"/>
         </NoSql>
 

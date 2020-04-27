@@ -43,7 +43,7 @@ public class DBAspect {
     @After("pointCut()")
     public void after(){
         DbContextHolder.clearDbType();
-        log.info("=====clear threadLocal dbType=====");
+        log.debug("=====clear threadLocal dbType=====");
     }
 
 }

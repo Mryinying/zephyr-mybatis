@@ -15,6 +15,8 @@
         <result column="region" property="region" />
         <result column="legal_person" property="legalPerson" />
         <result column="legal_id_card" property="legalIdCard" />
+        <result column="id_card_positive" property="idCardPositive" />
+        <result column="id_card_negative" property="idCardNegative" />
         <result column="auditor" property="auditor" />
         <result column="auditor_time" property="auditorTime" />
         <result column="note" property="note" />
@@ -30,10 +32,6 @@
         <result column="updated_by" property="updatedBy" />
         <result column="has_photo" property="hasPhoto" />
         <result column="customer_type" property="customerType" />
-        <result column="is_listed" property="isListed" />
-        <result column="size" property="size" />
-        <result column="profile" property="profile" />
-        <result column="logo" property="logo" />
         <result column="need_manager_fee" property="needManagerFee" />
         <result column="manager_fee" property="managerFee" />
         <result column="bill_server_rate" property="billServerRate" />
@@ -43,8 +41,12 @@
         <result column="manager_limit" property="managerLimit" />
         <result column="recommend_mode" property="recommendMode" />
         <result column="fail_reason" property="failReason" />
-        <result column="ws_bank_no" property="wsBankNo" />
         <result column="pay_fee" property="payFee" />
     </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, credit_code, name, business_license, short_name, address, province, city, region, legal_person, legal_id_card, id_card_positive, id_card_negative, auditor, auditor_time, note, industry, status, longitude, latitude, audit_status, p_threshold, created_at, created_by, updated_at, updated_by, has_photo, customer_type, need_manager_fee, manager_fee, bill_server_rate, empty_talent_switch, fee_status, daily_pay_type, manager_limit, recommend_mode, fail_reason, pay_fee
+    </sql>
 
 </mapper>

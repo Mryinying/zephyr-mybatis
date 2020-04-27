@@ -37,7 +37,6 @@ public class CustomerInfoController {
     public PageInfo<CustomerInfo> get(@RequestParam(required = false,defaultValue = "1") int pageNum,@RequestParam(required = false,defaultValue = "20")  int pageSize){
         PageHelper.startPage(pageNum,pageSize);
         List<CustomerInfo> customerInfos = customerInfoService.list();
-        cusProducer.produce(customerInfos);
         return new PageInfo<>(customerInfos);
     }
     @GetMapping("/insert")
