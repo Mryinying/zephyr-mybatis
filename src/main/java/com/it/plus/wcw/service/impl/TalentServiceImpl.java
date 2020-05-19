@@ -5,6 +5,7 @@ import com.it.plus.wcw.mapper.TalentMapper;
 import com.it.plus.wcw.service.ITalentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.dubbo.config.annotation.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -16,5 +17,10 @@ import org.apache.dubbo.config.annotation.Service;
  */
 @Service
 public class TalentServiceImpl extends ServiceImpl<TalentMapper, Talent> implements ITalentService {
+
+    @Transactional
+    public void getOne(){
+
+    }
 
 }

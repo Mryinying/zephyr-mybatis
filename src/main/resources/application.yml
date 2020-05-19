@@ -24,6 +24,9 @@ rocketmq:
     max-message-size: 4194304
     retry-times-when-send-failed: 2
 
+server:
+  port: 8081
+
 spring:
   application:
     name: zephyr-consumer

@@ -9,7 +9,6 @@ import com.it.rocket.CusProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +29,7 @@ public class CustomerInfoController {
 
     @Autowired
     private CustomerInfoServiceImpl customerInfoService;
+
     @Autowired
     private CusProducer cusProducer;
 
@@ -39,6 +39,7 @@ public class CustomerInfoController {
         List<CustomerInfo> customerInfos = customerInfoService.list();
         return new PageInfo<>(customerInfos);
     }
+
     @GetMapping("/insert")
     public PageInfo<CustomerInfo> insert(){
         new CustomerInfo().setAddress("ssssss").setCreatedAt(LocalDateTime.now()).insert();
