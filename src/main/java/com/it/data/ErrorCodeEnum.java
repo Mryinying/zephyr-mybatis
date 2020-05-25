@@ -4,11 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 
-/**
- * author：zhang.love
- * date：2020.04.22
- * version：1.0.0
- */
 @Getter
 public enum ErrorCodeEnum {
     /**
@@ -190,7 +185,6 @@ public enum ErrorCodeEnum {
     C0502("C0502", "语音提醒服务失败"),
     C0503("C0503", "邮件提醒服务失败");
 
-
     private String code;
     private String msg;
 
@@ -199,19 +193,4 @@ public enum ErrorCodeEnum {
         this.msg = msg;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
 }

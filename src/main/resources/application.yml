@@ -37,17 +37,21 @@ spring:
       database: test
       username: test
       password: test
+  redis:
+    host: 192.168.85.22
+    port: 6379
+    password: root
 
-dubbo:
-  registry:
-    address: zookeeper://192.168.85.22:2181
-  protocol:
-    name: dubbo
-    port: -1
-  provider:
-    filter: -exception
-  config-center:
-    timeout: 10000
+#dubbo:
+#  registry:
+#    address: zookeeper://192.168.85.22:2181
+#  protocol:
+#    name: dubbo
+#    port: -1
+#  provider:
+#    filter: -exception
+#  config-center:
+#    timeout: 10000
 
 #引入日志配置文件
 logging:

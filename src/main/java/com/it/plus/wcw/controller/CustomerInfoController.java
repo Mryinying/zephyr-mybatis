@@ -1,9 +1,11 @@
 package com.it.plus.wcw.controller;
 
 
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.it.plus.wcw.entity.CustomerInfo;
+import com.it.plus.wcw.service.ICustomerInfoService;
 import com.it.plus.wcw.service.impl.CustomerInfoServiceImpl;
 import com.it.rocket.CusProducer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +30,14 @@ import java.util.List;
 public class CustomerInfoController {
 
     @Autowired
-    private CustomerInfoServiceImpl customerInfoService;
+    private ICustomerInfoService customerInfoService;
 
     @Autowired
     private CusProducer cusProducer;
 
     @GetMapping("/get")
-    public PageInfo<CustomerInfo> get(@RequestParam(required = false,defaultValue = "1") int pageNum,@RequestParam(required = false,defaultValue = "20")  int pageSize){
+    public PageInfo<CustomerInfo> get(@RequestParam(required = false,defaultValue = "1") int pageNum,
+                                      @RequestParam(required = false,defaultValue = "20")  int pageSize){
         PageHelper.startPage(pageNum,pageSize);
         List<CustomerInfo> customerInfos = customerInfoService.list();
         return new PageInfo<>(customerInfos);

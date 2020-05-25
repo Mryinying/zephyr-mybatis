@@ -19,7 +19,11 @@ public class Generator {
 
 
     private static String[] tables = {
-            "wcw_customer_info"
+            "sys_permission",
+            "sys_role",
+            "sys_role_permission",
+            "sys_user",
+            "sys_user_role"
     };
 
     public static void main(String[] args) {
@@ -57,7 +61,7 @@ public class Generator {
         PackageConfig pc = new PackageConfig();
 
         pc.setParent("com.it.plus");
-        pc.setModuleName("wcw");
+        pc.setModuleName("sys");
         pc.setEntity("entity");
         pc.setService("service");
         pc.setServiceImpl("service.impl");
@@ -137,7 +141,7 @@ public class Generator {
         //驼峰转连字符
         strategy.setControllerMappingHyphenStyle(true);
         //表名前缀
-        strategy.setTablePrefix("wcw_");
+        strategy.setTablePrefix("sys_");
         mpg.setStrategy(strategy);
         mpg.setTemplateEngine(new VelocityTemplateEngine());
 

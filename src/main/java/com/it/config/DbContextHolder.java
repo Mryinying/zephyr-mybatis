@@ -24,7 +24,7 @@ public class DbContextHolder {
     }
 
     public static String getDbType() {
-        return contextHolder.get() == null ? MASTER : contextHolder.get();
+        return contextHolder.get() == null ? SLAVE : contextHolder.get();
     }
 
     public static void clearDbType() {
