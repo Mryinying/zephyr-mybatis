@@ -1,4 +1,4 @@
-package com.it.config;
+package com.it.config.db;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,6 +1,6 @@
 package com.it.aspect;
 
-import com.it.config.DbContextHolder;
+import com.it.config.db.DbContextHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;

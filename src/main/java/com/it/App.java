@@ -16,7 +16,7 @@ import java.net.UnknownHostException;
 public class App {
 
     public static void main(String[] args) {
-        System.setProperty("LOCAL_IP",  getLocalIp() );
+        System.setProperty("local_ip",  getLocalIp() );
         SpringApplication.run(App.class, args);
     }
 
