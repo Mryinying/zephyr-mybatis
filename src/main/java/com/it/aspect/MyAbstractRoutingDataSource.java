@@ -25,7 +25,7 @@ public class MyAbstractRoutingDataSource  extends AbstractRoutingDataSource {
             return typeKey;
         }
         //使用随机数决定使用哪个读库
-        int sum = new Random().nextInt(num+1);
+        int sum = new Random().nextInt(num);
         log.info("=====use slave{} read======", sum);
         return DbContextHolder.SLAVE + sum;
     }

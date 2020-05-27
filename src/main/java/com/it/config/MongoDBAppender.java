@@ -16,7 +16,7 @@ public class MongoDBAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
 
     @Override
     protected void append(ILoggingEvent eventObject) {
-        /*MongoTemplate mongoTemplate = ApplicationContextUtil.getBean(MongoTemplate.class);
+        MongoTemplate mongoTemplate = ApplicationContextUtil.getBean(MongoTemplate.class);
         final Document doc = new Document();
         doc.append("date", LocalDateTime.now());
         doc.append("level", eventObject.getLevel().toString());
@@ -26,6 +26,6 @@ public class MongoDBAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
         if (eventObject.getMDCPropertyMap() != null && !eventObject.getMDCPropertyMap().isEmpty()) {
             doc.append("mdc", eventObject.getMDCPropertyMap());
         }
-        mongoTemplate.getCollection("zephyr").insertOne(doc);*/
+        mongoTemplate.getCollection("zephyr").insertOne(doc);
     }
 }

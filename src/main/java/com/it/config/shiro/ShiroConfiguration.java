@@ -22,6 +22,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.DelegatingFilterProxy;
 
+import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -47,6 +48,14 @@ public class ShiroConfiguration {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
+        // 添加登录过滤器
+        Map<String, Filter> filters = new LinkedHashMap<>();
+        // 这里注释的一行是我这次踩的一个小坑，我一开始按下面这么配置产生一个我意料之外的问题
+        // filters.put("authLogin", authLoginFilter());
+        // 正确的配置是需要我们自己new出来，不能将这个Filter交给Spring管理，后面会说明
+        filters.put("authLogin", new AuthLoginFilter());
+        shiroFilterFactoryBean.setFilters(filters);
+
         // 过滤器链定义映射
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
 
@@ -57,6 +66,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/user/register", "anon");
         // 配置不会被拦截的链接 顺序判断，因为前端模板采用了thymeleaf，这里不能直接使用 ("/static/**", "anon")来配置匿名访问，必须配置到每个静态目录
+        filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/css/**", "anon");
         filterChainDefinitionMap.put("/fonts/**", "anon");
         filterChainDefinitionMap.put("/img/**", "anon");
@@ -117,6 +127,7 @@ public class ShiroConfiguration {
         securityManager.setSessionManager(sessionManager());
         // 自定义缓存实现 使用redis
         securityManager.setCacheManager(cacheManager());
+        securityManager.setRememberMeManager(null);
         return securityManager;
     }
 
@@ -186,9 +197,16 @@ public class ShiroConfiguration {
      */
     @Bean
     public SessionManager sessionManager() {
-        MySessionManager mySessionManager = new MySessionManager();
-        mySessionManager.setSessionDAO(redisSessionDAO());
-        return mySessionManager;
+        MySessionManager sessionManager = new MySessionManager();
+        sessionManager.setDeleteInvalidSessions(true);
+        sessionManager.setSessionDAO(redisSessionDAO());
+        sessionManager.setSessionValidationSchedulerEnabled(true);
+        sessionManager.setDeleteInvalidSessions(true);
+        /**
+         * 修改Cookie中的SessionId的key，默认为JSESSIONID，自定义名称
+         */
+        sessionManager.setSessionIdCookie(new SimpleCookie("JSESSIONID"));
+        return sessionManager;
     }
 
     /*
@@ -210,7 +228,7 @@ public class ShiroConfiguration {
         return authorizationAttributeSourceAdvisor;
     }
 
-    @Bean
+    /*@Bean
     public SimpleCookie cookie() {
         // cookie的name,对应的默认是 JSESSIONID
         SimpleCookie cookie = new SimpleCookie("SHARE_JSESSIONID");
@@ -218,7 +236,7 @@ public class ShiroConfiguration {
         //  path为 / 用于多个系统共享 JSESSIONID
         cookie.setPath("/");
         return cookie;
-    }
+    }*/
 
     /*//设置cookie
     @Bean
